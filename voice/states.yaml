@@ -4,6 +4,18 @@ text_sensor:
     id: state
     icon: mdi:state-machine
 
+button:
+  - platform: template
+    name: Converse
+    on_press: 
+      then:
+        - if:
+            condition: voice_assistant.is_running
+            then:
+              - voice_assistant.stop:
+            else:
+              - voice_assistant.start:
+
 voice_assistant:
   id: va
   speaker: !remove
