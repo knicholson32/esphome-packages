@@ -1,0 +1,53 @@
+text_sensor:
+  - platform: template
+    name: State
+    id: state
+    icon: mdi:state-machine
+
+voice_assistant:
+  id: va
+  speaker: !remove
+  on_intent_start:
+    - text_sensor.template.publish:
+        id: state
+        state: 'intent_start'
+  on_intent_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'intent_end'
+  on_listening:
+    - text_sensor.template.publish:
+        id: state
+        state: 'listening'
+  on_start:
+    - text_sensor.template.publish:
+        id: state
+        state: 'start'
+  on_wake_word_detected:
+    - text_sensor.template.publish:
+        id: state
+        state: 'wake_word_detected'
+  on_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'end'
+  on_stt_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'stt_end'
+  on_tts_start:
+    - text_sensor.template.publish:
+        id: state
+        state: 'tts_start'
+  on_tts_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'tts_end'
+  on_idle:
+    - text_sensor.template.publish:
+        id: state
+        state: 'idle'
+  on_error:
+    - text_sensor.template.publish:
+        id: state
+        state: 'error'
