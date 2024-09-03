@@ -1,0 +1,64 @@
+text_sensor:
+  - platform: template
+    name: State
+    id: state
+    icon: mdi:state-machine
+
+button:
+  - platform: template
+    name: Converse
+    on_press: 
+      then:
+        - if:
+            condition: voice_assistant.is_running
+            then:
+              - voice_assistant.stop:
+            else:
+              - voice_assistant.start:
+
+voice_assistant:
+  id: va
+  on_intent_start:
+    - text_sensor.template.publish:
+        id: state
+        state: 'intent_start'
+  on_intent_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'intent_end'
+  on_listening:
+    - text_sensor.template.publish:
+        id: state
+        state: 'listening'
+  on_start:
+    - text_sensor.template.publish:
+        id: state
+        state: 'start'
+  on_wake_word_detected:
+    - text_sensor.template.publish:
+        id: state
+        state: 'wake_word_detected'
+  on_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'end'
+  on_stt_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'stt_end'
+  on_tts_start:
+    - text_sensor.template.publish:
+        id: state
+        state: 'tts_start'
+  on_tts_end:
+    - text_sensor.template.publish:
+        id: state
+        state: 'tts_end'
+  on_idle:
+    - text_sensor.template.publish:
+        id: state
+        state: 'idle'
+  on_error:
+    - text_sensor.template.publish:
+        id: state
+        state: 'error'
