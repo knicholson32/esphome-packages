@@ -18,7 +18,6 @@ button:
 
 voice_assistant:
   id: va
-  speaker: !remove
   on_intent_start:
     - text_sensor.template.publish:
         id: state
